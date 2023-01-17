@@ -1,6 +1,6 @@
 const PostContent = ({ post }) => {
 
-const { content, id, slug, createdAt } = post
+const { content, slug, createdAt } = post
 
 const dateString = new Date(createdAt).toLocaleDateString("en-US", {
     dateStyle: "full",
