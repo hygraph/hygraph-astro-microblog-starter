@@ -1,11 +1,23 @@
-# Astro with Tailwind
+# More Button in Astro with Hygraph Pagination
+
+This is a demo that corresponds to [this article](https://hygraph.com/blog/lazy-load-content-astro-hygraph-pagination) about Hygraph pagination. 
+
+## Getting Started 
+
+For the quickest start, use the button below to clone the Hygraph project with schemas and content. 
+
+[![Clone project](https://hygraph.com/button)](https://app.hygraph.com/clone/17eb970b42d544c595b5772ba3614551?name=Microblog)
+
+
+For a slightly slower start, you'll need a new Hygraph project with a `post` schema that has a `slug` and `content` field. `content` should be a Rich Text field.
+
+To run the site locally run the following commands in your CLI.
 
 ```
-npm init astro -- --template with-tailwindcss
+git clone git@github.com:brob/astro-hygraph-timeline-example.git
+
+cd astro-hygraph-timeline-example && npm install
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/with-tailwindcss)
+Once you have that, create a `.env` file in the root directory and the `ASTRO_HYGRAPH_ENDPOINT` variable with a link to your API endpoint from Hygraph.
 
-Astro comes with [Tailwind](https://tailwindcss.com) support out of the box. This example showcases how to style your Astro project with Tailwind.
-
-For complete setup instructions, please see our [Styling Guide](https://docs.astro.build/guides/styling#-tailwind).
