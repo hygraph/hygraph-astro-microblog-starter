@@ -14,9 +14,9 @@ For a slightly slower start, you'll need a new Hygraph project with a `post` sch
 To run the site locally run the following commands in your CLI.
 
 ```
-git clone git@github.com:brob/astro-hygraph-timeline-example.git
+npx degit git@github.com:hygraph/hygraph-astro-microblog-starter.git
 
-cd astro-hygraph-timeline-example && npm install
+cd hygraph-astro-microblog-starter && npm install
 ```
 
 Once you have that, create a `.env` file in the root directory and the `ASTRO_HYGRAPH_ENDPOINT` variable with a link to your API endpoint from Hygraph.
