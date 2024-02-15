@@ -25,7 +25,7 @@ const query = `query MyQuery($cursor: String!, $size: Int!) {
 
 
 function MoreButton({currentCursor, size=1, ENDPOINT}) {
-/// do a whole bunch of react
+
     const [posts, setPosts] = useState([])
     const [cursor, setCursor] = useState(currentCursor)
     const [hasNext, setHasNext] = useState(true)
