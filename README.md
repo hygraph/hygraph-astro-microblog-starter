@@ -1,4 +1,4 @@
-# More Button in Astro with Hygraph Pagination
+# Hygraph Microblog Starter
 
 This is a demo that corresponds to [this article](https://hygraph.com/blog/lazy-load-content-astro-hygraph-pagination) about Hygraph pagination. 
 
