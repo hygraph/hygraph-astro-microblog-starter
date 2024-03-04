@@ -1,6 +1,7 @@
 ---
 import Main from "../../layouts/Main.astro";
 import Post from "../../components/Post.astro";
+import { postFragment } from "../../../fragments/posts";
 
 //export getstaticpaths
 export async function getStaticPaths() {
@@ -14,14 +15,9 @@ export async function getStaticPaths() {
       },
       body: JSON.stringify({
         query: `query MyQuery() {
-        posts() {
-            id
-            slug
-            content {
-                html
-            }
-            createdAt
-        }
+          posts() {
+              ${postFragment}
+          }
         }
         `,
       }),
@@ -31,7 +27,6 @@ export async function getStaticPaths() {
   const json = await response.json();
 
   const paths = json.data.posts.map((post) => ({
-    
     params: { slug: post.slug },
     props: { post },
   }));

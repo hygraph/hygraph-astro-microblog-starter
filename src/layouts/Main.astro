@@ -16,5 +16,9 @@ const { title } = Astro.props.frontmatter || Astro.props;
 				<slot />
 			</div>
 		</div>
+
+		<footer class="text-center bg-indigo-900 text-white p-3">
+			Copyright {new Date().getFullYear()} | Powered by <a href="https://hygraph.com">Hygraph</a>
+		</footer>
 	</body>
 </html>

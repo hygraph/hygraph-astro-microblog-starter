@@ -1,9 +1,10 @@
 ---
 import Main from "../layouts/Main.astro";
 import Post from "../components/Post.astro";
-import MoreButton from "../components/MoreButton"
-const pageSize = 5
+import More from "../components/More.jsx";
+import { postsFragment } from '../../fragments/posts'
 
+const pageSize = 3;
 const response = await fetch(
   import.meta.env.ASTRO_HYGRAPH_ENDPOINT,
   {
@@ -14,43 +15,26 @@ const response = await fetch(
     },
     body: JSON.stringify({
       query: `query MyQuery($size: Int) {
-  page: postsConnection(first: $size, orderBy: createdAt_DESC) {
-    pageInfo {
-      hasNextPage
-      endCursor
-    }
-    postsArray: edges {
-      cursor
-      post: node {
-        slug
-        id
-        createdAt
-        content {
-          html
-        }
-      }
-    }
-  }
-}
-
+				pages:postsConnection(first: $size,  orderBy: createdAt_DESC) {
+					${postsFragment}
+				}
+			}
 		`,
-		variables: { size: pageSize }
-	    }),
+		variables: {size: pageSize}
+    }),
   }
 );
 
 
 const data = await response.json();
-const {page} = data.data;
+const {pages} = data.data;
 ---
 
 <Main title="My Microblog">
   	<div>
-		{page.postsArray.map((post) => {
+		{pages.postsArray.map((post) => {
 		return <Post post={post.post} />
 		})}
 	</div>
-
-	{page.pageInfo.hasNextPage && <MoreButton client:visible size={pageSize} currentCursor={page.pageInfo.endCursor} ENDPOINT={import.meta.env.ASTRO_HYGRAPH_ENDPOINT} />}
-
+	{pages.pageInfo.hasNextPage && <More client:visible ENDPOINT={import.meta.env.ASTRO_HYGRAPH_ENDPOINT} size={pageSize} currentCursor={pages.pageInfo.endCursor} />}
 </Main>
