@@ -3,29 +3,26 @@ import Main from "../../layouts/Main.astro";
 import Post from "../../components/Post.astro";
 import { postFragment } from "../../../fragments/posts";
 
-//export getstaticpaths
 export async function getStaticPaths() {
-  const response = await fetch(
-    import.meta.env.ASTRO_HYGRAPH_ENDPOINT,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        query: `query MyQuery() {
-          posts() {
-              ${postFragment}
-          }
-        }
+  const response = await fetch(import.meta.env.ASTRO_HYGRAPH_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: `query MyQuery {
+                posts {
+                  ${postFragment}
+                }
+              }
+
         `,
-      }),
-    }
-  );
+    }),
+  });
 
   const json = await response.json();
-
+  console.log(json);
   const paths = json.data.posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
@@ -34,15 +31,11 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const {post} = Astro.props
+const { post } = Astro.props;
 ---
-
-
 
 <Main title="My Microblog">
   <div>
-
     <Post post={post} />
-    
   </div>
 </Main>
